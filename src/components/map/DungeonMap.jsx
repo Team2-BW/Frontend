@@ -3,14 +3,16 @@ import axios from "axios";
 
 import { EmptySpace, Row } from "./mapStyles.js";
 import Room from "../room/Room.jsx";
+import Legend from "../legend/Legend.jsx";
+import Controls from "../controls/Controls.jsx";
 
-class Map extends React.Component {
+class DungeonMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       matrix: [],
-      roomArray: [],
-      currentRoom: "(61,56)"
+      roomArray: this.props.roomArray,
+      currentRoom: "(60,61)"
     };
 
     this.mapContainer = React.createRef();
@@ -36,6 +38,8 @@ class Map extends React.Component {
     ) {
       this._insertRooms();
     }
+
+    this._scrollToRoom(this.state.currentRoom);
   }
 
   // Handles getting farthest point
@@ -61,8 +65,8 @@ class Map extends React.Component {
     let matrix = [];
     const farthestPoint = this._getFarthestPoint();
 
-    for (let i = 0; i < farthestPoint; i++) {
-      matrix.push(new Array(farthestPoint).fill(0));
+    for (let i = 0; i < 100; i++) {
+      matrix.push(new Array(100).fill(0));
     }
 
     this.setState({ matrix });
@@ -87,12 +91,12 @@ class Map extends React.Component {
 
   // Handles scrolling to current room
   _scrollToRoom = coordinates => {
-    console.log(this.mapContainer, this[coordinates]);
-    if (this.mapContainer && this[coordinates]) {
-      console.log(this[coordinates].offsetLeft, this[coordinates].offsetTop);
-      console.log(this.mapContainer.scrollLeft, this.mapContainer.scrollTop);
-      this.mapContainer.scrollLeft = this[coordinates].offsetLeft;
-      this.mapContainer.scrollTop = this[coordinates].offsetTop;
+    if (this[coordinates]) {
+      this[coordinates].scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center"
+      });
     }
   };
 
@@ -128,9 +132,11 @@ class Map extends React.Component {
     return (
       <div ref={ref => (this.mapContainer = ref)}>
         {matrix.length && this._renderMap()}
+        <Legend />
+        <Controls />
       </div>
     );
   }
 }
 
-export default Map;
+export default DungeonMap;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 
-import Map from "./components/map/Map";
+import DungeonMap from "./components/map/DungeonMap";
 
 class App extends React.Component {
   constructor(props) {
@@ -11,12 +11,10 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {}
-
   render() {
     return (
       <div className="App">
-        <Route path="/" component={Map} />
+        <Route path="/" component={DungeonMap} />
       </div>
     );
   }

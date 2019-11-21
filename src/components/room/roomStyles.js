@@ -1,26 +1,26 @@
 import styled from "styled-components";
 
-import { secondaryC } from "../../utils/styleVars.js";
+import { primaryC, secondaryC, tertiaryC } from "../../utils/styleVars.js";
 
 export const RoomSpace = styled.div`
-  width: 12px;
-  height: 12px;
-  min-width: 12px;
-  min-height: 12px;
-  border: 1px solid grey;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  border: 1px solid #40303e;
   background: green;
 
   cursor: pointer;
   position: relative;
   &::before {
     position: absolute;
-    bottom: 19px;
-    left: -87px;
-    background-color: ${secondaryC};
+    bottom: 37px;
+    left: -84px;
+    background-color: ${tertiaryC};
     border-radius: 5px;
     color: #fff;
     content: "${props =>
-      `${props.roomName}: ${props.roomDescription} ${props.roomCoordinates}`}";
+      `${props.roomName} ${props.roomDescription} ${props.roomCoordinates}`}";
     padding: 1rem;
     text-transform: none;
     transition: all 0.5s ease;
@@ -30,10 +30,10 @@ export const RoomSpace = styled.div`
   &::after {
     position: absolute;
     top: -7px;
-    left: 6px;
+    left: 14px;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid ${secondaryC};
+    border-top: 5px solid ${tertiaryC};
     content: " ";
     font-size: 0;
     line-height: 0;
